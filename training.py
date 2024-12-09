@@ -1,5 +1,4 @@
-import mediapipe as mp
-from stone import process
+import mediapipe as mp 
 import os
 import cv2
 import numpy as np
@@ -134,79 +133,7 @@ def predict_image(model_orientation, model_skin_tone, image_path, image_size=(10
         return {"Orientation": orientation, "Skin Tone": skin_tone, "Jewelry": jewelry}
     return {"Error": "Hand not detected"}
 
-new_image_path = r"D:\jwl\AI-project-jewllry-recommendation-system\back_palm\Hand_0000080.jpg"
+new_image_path = r"D:\jwl\AI-project-jewllry-recommendation-system\back_palm\Hand_0000220.jpg"
 result = predict_image(orientation_model, skin_tone_model, new_image_path)
 print("Prediction Result:", result)
 
-
-
-# from stone import process
-
-# def classify_brightness(skin_tone_hex):
-#     """
-#     Classify skin tone into bright, medium, or dark based on hex color.
-#     """
-#     # Convert hex to RGB
-#     skin_tone_rgb = tuple(int(skin_tone_hex.lstrip('#')[i:i+2], 16) for i in (0, 2, 4))
-#     r, g, b = skin_tone_rgb
-
-#     # Calculate brightness using relative luminance formula
-#     brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b
-
-#     # Classify brightness
-#     if brightness < 85:
-#         return "Dark"
-#     elif brightness < 170:
-#         return "Medium"
-#     else:
-#         return "Bright"
-
-#     result2 = process(new_image_path)
-
-
-# Test on a new image
-# new_image_path = r"D:\jwl\AI-project-jewllry-recommendation-system\back_palm\Hand_0000009.jpg"
-# enhanced_result = predict_with_stone(orientation_model, skin_tone_model, new_image_path)
-
-# print("Enhanced Prediction Result:", enhanced_result)
-
-# from stone import process
-
-# def classify_brightness_from_rgb(rgb):
-#     r, g, b = rgb
-
-#     # Calculate brightness using relative luminance formula
-#     brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b
-
-#     # Classify brightness
-#     if brightness < 85:
-#         return "Dark"
-#     elif brightness < 170:
-#         return "Medium"
-#     else:
-#         return "Bright"
-
-# def classify_skin_tone_with_brightness_direct(image_path):
-
-#     # Process the image using the Stone library
-#     result2 = process(image_path)
-
-#     # Check if the result contains face data
-#     if "faces" in result2 and len(result2["faces"]) > 0:
-#         face_data = result2["faces"][0]  # Access the first face
-#         skin_tone = face_data.get("skin_tone", "N/A")  # Hex color of the skin tone
-#         dominant_colors = face_data.get("dominant_colors", [])
-#         if skin_tone != "N/A" and dominant_colors:
-#             # Use the dominant color for RGB classification
-#             dominant_rgb = tuple(int(dominant_colors[0]["color"].lstrip('#')[i:i+2], 16) for i in (0, 2, 4))
-#             brightness_category = classify_brightness_from_rgb(dominant_rgb)
-#             return {
-#                 "Skin Tone": skin_tone,
-#                 "Brightness Category": brightness_category,
-#                 "Dominant RGB": dominant_rgb,
-#             }
-#         else:
-#             return {"Error": "Skin tone or dominant color data unavailable."}
-#     else:
-#         return {"Error": "No face data available."}
-# print(classify_skin_tone_with_brightness_direct(new_image_path))
